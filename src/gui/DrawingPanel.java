@@ -33,18 +33,24 @@ public class DrawingPanel extends JPanel {
 		int widthOfBar = (int) Math.floor(width / array.size());
 		for (int i = 0; i < array.size(); i++) {
 			int heightOfBar = (height - margin) / getMaxValue(array) * array.get(i);
-			g.setColor(Color.green);
+			g.setColor(new Color(0, checkColor((int) ((255/(float)array.size())*array.get(i))), 0));
 			if (i == switch1 || i == switch2)
 				g.setColor(Color.red);
 			if (array.get(i) == pivot)
 				g.setColor(Color.blue);
 			g.fillRect(i * widthOfBar, bi.getHeight() - heightOfBar - margin, widthOfBar, heightOfBar);
-			g.setColor(Color.green.darker());
-			g.drawRect(i * widthOfBar, bi.getHeight() - heightOfBar - margin, widthOfBar, heightOfBar);
 		}
 		f.getGraphics().drawImage(bi, 0, margin, bi.getWidth(), bi.getHeight(), null);
 	}
 
+	private int checkColor(int i) {
+		if(i > 255)
+			i = 255;
+		if(i < 0)
+			i = 0;
+		return i;
+	}
+	
 	private int getMaxValue(ArrayList<Integer> array) {
 		int max = 0;
 		for (int i = 0; i < array.size(); i++) {

@@ -25,7 +25,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	public MainFrame() {
 		initializeControls();
 		a = new ArrayList<Integer>();
-		for (int i = 1; i <= 60; i++) {
+		for (int i = 1; i <= 960; i++) {
 			a.add(i);
 		}
 		Collections.shuffle(a);
