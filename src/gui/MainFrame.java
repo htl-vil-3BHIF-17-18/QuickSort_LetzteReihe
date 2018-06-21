@@ -26,7 +26,7 @@ public class MainFrame extends JFrame implements ActionListener, KeyListener {
 	public MainFrame() {
 		initializeControls();
 		a = new ArrayList<Integer>();
-		for (int i = 1; i <= 480; i++) {
+		for (int i = 1; i <= 60; i++) {
 			a.add(i);
 		}
 		Collections.shuffle(a);
