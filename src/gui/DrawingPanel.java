@@ -2,8 +2,8 @@ package gui;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -18,8 +18,9 @@ public class DrawingPanel extends JPanel {
 
 	public DrawingPanel(MainFrame f) {
 		this.f = f;
-		this.setMinimumSize(new Dimension(f.getWidth(), f.getHeight()));
-		bi = new BufferedImage(1920, 1080, BufferedImage.TYPE_INT_ARGB);
+		this.setMinimumSize(Toolkit.getDefaultToolkit().getScreenSize());
+		bi = new BufferedImage((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
+				(int) Toolkit.getDefaultToolkit().getScreenSize().getHeight(), BufferedImage.TYPE_INT_ARGB);
 	}
 
 	public void drawArray(ArrayList<Integer> array, int switch1, int switch2, int pivot) {
