@@ -70,6 +70,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		if (e.getSource() == sortButton) {
 			SortHelper h = SortHelper.getInstance(this);
 			h.quicksort(a, 0, a.size() - 1);
+			sortButton.setEnabled(false);
 		} else if (e.getSource() == exitButton) {
 			System.exit(0);
 		}else if(e.getSource() == shuffleButton) {
