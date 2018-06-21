@@ -27,7 +27,7 @@ public class SortHelper {
 	private int quickSortTeile(ArrayList<Integer> data, int left, int right) {
 		int i = left;
 		int j = right;
-		int pivotElement = data.get((left + right) / 2); // pivot element ist
+		int pivotElement = data.get((left + right) / 2); 	// pivot element ist
 															// die mitte des
 															// array
 
