@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 
@@ -22,7 +23,7 @@ public class DrawingPanel extends JPanel {
 				(int) Toolkit.getDefaultToolkit().getScreenSize().getHeight(), BufferedImage.TYPE_INT_ARGB);
 	}
 
-	public void drawArray(ArrayList<Integer> array, int switch1, int switch2, int pivot) {
+	public void drawArray(ArrayList<Integer> array, HashMap<Integer, Color> specialColors) {
 		Graphics2D g = (Graphics2D) bi.getGraphics();
 		g.setColor(Color.white);
 		g.fillRect(0, 0, bi.getWidth(), bi.getHeight());
@@ -32,13 +33,16 @@ public class DrawingPanel extends JPanel {
 		for (int i = 0; i < array.size(); i++) {
 			int heightOfBar = (int) ((float)(height - margin) / (float)getMaxValue(array) * array.get(i));
 			g.setColor(new Color(0, checkColor((int) ((255/(float)array.size())*array.get(i))), 0));
-			if (i == switch1 || i == switch2)
-				g.setColor(Color.red);
-			if (array.get(i) == pivot)
-				g.setColor(Color.blue);
+			if(specialColors.containsKey(i)) {
+				g.setColor(specialColors.get(i));
+			}
 			g.fillRect(i * widthOfBar, bi.getHeight() - heightOfBar - margin, widthOfBar, heightOfBar);
 		}
 		f.getGraphics().drawImage(bi, 0, margin, bi.getWidth(), bi.getHeight(), null);
+	}
+	
+	public void drawArray(ArrayList<Integer> array) {
+		drawArray(array, new HashMap<Integer, Color>());
 	}
 
 	private int checkColor(int i) {

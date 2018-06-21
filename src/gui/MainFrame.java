@@ -1,12 +1,14 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -70,6 +72,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		if (e.getSource() == sortButton) {
 			SortHelper h = SortHelper.getInstance(this);
 			h.quicksort(a, 0, a.size() - 1);
+			//h.sort(a);
 			sortButton.setEnabled(false);
 		} else if (e.getSource() == exitButton) {
 			System.exit(0);
@@ -83,13 +86,17 @@ public class MainFrame extends JFrame implements ActionListener {
 				a.add(i);
 			}
 			Collections.shuffle(a);
-			drawArray(a, -1, -1, -1);
+			drawArray(a);
 			sortButton.setEnabled(true);
 		}
 	}
 
-	public void drawArray(ArrayList<Integer> a, int index1, int index2, int pivot) {
-		graphicPanel.drawArray(a, index1, index2, pivot);
+	public void drawArray(ArrayList<Integer> a, HashMap<Integer, Color> specialColors) {
+		graphicPanel.drawArray(a, specialColors);
+	}
+	
+	public void drawArray(ArrayList<Integer> a) {
+		drawArray(a, new HashMap<Integer, Color>());
 	}
 
 }
