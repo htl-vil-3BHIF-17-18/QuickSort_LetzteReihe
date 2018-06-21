@@ -11,6 +11,7 @@ import java.util.Collections;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -72,6 +73,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		} else if (e.getSource() == exitButton) {
 			System.exit(0);
 		}else if(e.getSource() == shuffleButton) {
+			if (Integer.parseInt(inputArrayAmount.getText()) < 0 || Integer.parseInt(inputArrayAmount.getText()) > 1920) {
+				JOptionPane.showMessageDialog(null, "Die Anzahl der Balken ist falsch (0-1920)");
+				return;
+			}
 			a = new ArrayList<Integer>();
 			for (int i = 1; i <= Integer.parseInt(inputArrayAmount.getText()); i++) {
 				a.add(i);

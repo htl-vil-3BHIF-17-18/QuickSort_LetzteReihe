@@ -30,7 +30,7 @@ public class DrawingPanel extends JPanel {
 		int width = this.getWidth();
 		int widthOfBar = (int) Math.floor(width / array.size());
 		for (int i = 0; i < array.size(); i++) {
-			int heightOfBar = (height - margin) / getMaxValue(array) * array.get(i);
+			int heightOfBar = (int) ((float)(height - margin) / (float)getMaxValue(array) * array.get(i));
 			g.setColor(new Color(0, checkColor((int) ((255/(float)array.size())*array.get(i))), 0));
 			if (i == switch1 || i == switch2)
 				g.setColor(Color.red);
