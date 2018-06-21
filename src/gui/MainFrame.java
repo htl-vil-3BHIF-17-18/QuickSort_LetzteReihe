@@ -21,9 +21,16 @@ public class MainFrame extends JFrame implements ActionListener, KeyListener {
 	private JButton sortButton;
 	private JPanel topPanel;
 	private DrawingPanel graphicPanel;
+	private ArrayList<Integer> a;
 
 	public MainFrame() {
 		initializeControls();
+		a = new ArrayList<Integer>();
+		for (int i = 1; i <= 480; i++) {
+			a.add(i);
+		}
+		Collections.shuffle(a);
+		graphicPanel.drawArray(a, -1, -1, -1);
 	}
 
 	private void initializeControls() {
@@ -51,11 +58,6 @@ public class MainFrame extends JFrame implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sortButton) {
 			SortHelper h = SortHelper.getInstance(this);
-			ArrayList<Integer> a = new ArrayList<Integer>();
-			for (int i = 1; i <= 480; i++) {
-				a.add(i);
-			}
-			Collections.shuffle(a);
 			h.quicksort(a, 0, a.size() - 1);
 		}
 	}
