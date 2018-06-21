@@ -19,7 +19,6 @@ public class DrawingPanel extends JPanel {
 	public DrawingPanel(MainFrame f) {
 		this.f = f;
 		this.setMinimumSize(new Dimension(f.getWidth(), f.getHeight()));
-		this.addKeyListener(f);
 		bi = new BufferedImage(1920, 1080, BufferedImage.TYPE_INT_ARGB);
 	}
 
@@ -32,7 +31,7 @@ public class DrawingPanel extends JPanel {
 		int width = this.getWidth();
 		int widthOfBar = (int) Math.floor(width / array.size());
 		for (int i = 0; i < array.size(); i++) {
-			int heightOfBar = (height-margin) / getMaxValue(array) * array.get(i);
+			int heightOfBar = (height - margin) / getMaxValue(array) * array.get(i);
 			g.setColor(Color.green);
 			if (i == switch1 || i == switch2)
 				g.setColor(Color.red);

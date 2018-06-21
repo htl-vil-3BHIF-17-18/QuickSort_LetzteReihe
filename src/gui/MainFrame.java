@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -15,10 +13,11 @@ import javax.swing.JPanel;
 
 import bll.SortHelper;
 
-public class MainFrame extends JFrame implements ActionListener, KeyListener {
+public class MainFrame extends JFrame implements ActionListener {
 	private static final long serialVersionUID = -8026416994513756565L;
 
 	private JButton sortButton;
+	private JButton exitButton;
 	private JPanel topPanel;
 	private DrawingPanel graphicPanel;
 	private ArrayList<Integer> a;
@@ -47,36 +46,27 @@ public class MainFrame extends JFrame implements ActionListener, KeyListener {
 		topPanel = new JPanel();
 		sortButton = new JButton("Sort");
 		sortButton.addActionListener(this);
+		exitButton = new JButton("Exit");
+		exitButton.addActionListener(this);
 		topPanel.add(sortButton);
+		topPanel.add(exitButton);
 		this.add(topPanel, BorderLayout.PAGE_START);
 		graphicPanel = new DrawingPanel(this);
 		this.add(graphicPanel, BorderLayout.CENTER);
 		this.pack();
-		this.addKeyListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sortButton) {
 			SortHelper h = SortHelper.getInstance(this);
 			h.quicksort(a, 0, a.size() - 1);
+		} else if (e.getSource() == exitButton) {
+			System.exit(0);
 		}
 	}
 
 	public void drawArray(ArrayList<Integer> a, int index1, int index2, int pivot) {
 		graphicPanel.drawArray(a, index1, index2, pivot);
-	}
-
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-			System.exit(0);
-	}
-
-	public void keyReleased(KeyEvent e) {
-
-	}
-
-	public void keyTyped(KeyEvent e) {
-
 	}
 
 }
