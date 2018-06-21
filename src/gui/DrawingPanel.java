@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
@@ -27,7 +26,6 @@ public class DrawingPanel extends JPanel {
 		Graphics2D g = (Graphics2D) bi.getGraphics();
 		g.setColor(Color.white);
 		g.fillRect(0, 0, bi.getWidth(), bi.getHeight());
-		g.setStroke(new BasicStroke(1));
 		int height = this.getHeight();
 		int width = this.getWidth();
 		int widthOfBar = (int) Math.floor(width / array.size());
