@@ -34,8 +34,11 @@ public class MainFrame extends JFrame implements ActionListener {
 	private ArrayList<Integer> a;
 	private JLabel labelSwapCounter;
 	private int swapCounter;
-
+	
 	private SortHelper sh;
+	
+	private Runnable sortingRunnable;
+	private Thread threadSorting;
 	
 	public MainFrame() {
 		sh = SortHelper.getInstance(this);
@@ -90,7 +93,18 @@ public class MainFrame extends JFrame implements ActionListener {
 		if (e.getSource() == sortButton) {
 			swapCounter = 0;
 			sh.setSelectedSort(SORT_TYPE.valueOf((String) comboBoxSortingType.getSelectedItem()));
-			sh.sort(a);
+			sortingRunnable = new Runnable() {
+				public void run() {
+					sh.sort(a);
+					try {
+						threadSorting.join();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			};
+			threadSorting = new Thread(sortingRunnable);
+			threadSorting.start();
 			sortButton.setEnabled(false);
 		} else if (e.getSource() == exitButton) {
 			System.exit(0);
