@@ -30,6 +30,7 @@ public class DrawingPanel extends JPanel {
 		int height = this.getHeight();
 		int width = this.getWidth();
 		int widthOfBar = (int) Math.floor(width / array.size());
+		int widthOfChart = widthOfBar * array.size();
 		for (int i = 0; i < array.size(); i++) {
 			int heightOfBar = (int) ((float)(height - margin) / (float)getMaxValue(array) * array.get(i));
 			g.setColor(new Color(0, checkColor((int) ((255/(float)array.size())*array.get(i))), 0));
@@ -38,7 +39,7 @@ public class DrawingPanel extends JPanel {
 			}
 			g.fillRect(i * widthOfBar, bi.getHeight() - heightOfBar - margin, widthOfBar, heightOfBar);
 		}
-		f.getGraphics().drawImage(bi, 0, margin, bi.getWidth(), bi.getHeight(), null);
+		f.getGraphics().drawImage(bi, 0, margin, (int) (bi.getWidth()*(bi.getWidth()/(float)widthOfChart)), bi.getHeight(), null);
 	}
 	
 	public void drawArray(ArrayList<Integer> array) {
