@@ -34,12 +34,12 @@ public class MainFrame extends JFrame implements ActionListener {
 	private ArrayList<Integer> a;
 	private JLabel labelSwapCounter;
 	private int swapCounter;
-	
+
 	private SortHelper sh;
-	
+
 	private Runnable sortingRunnable;
 	private Thread threadSorting;
-	
+
 	public MainFrame() {
 		sh = SortHelper.getInstance(this);
 		initializeControls();
@@ -61,7 +61,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		topPanel = new JPanel();
 		topPanel.setLayout(new GridLayout(2, 7));
 		inputArrayAmount = new JTextField();
-		inputArrayAmount.setBounds(140, 70, 200,30);
+		inputArrayAmount.setBounds(140, 70, 200, 30);
 		shuffleButton = new JButton("Shuffle Array");
 		shuffleButton.addActionListener(this);
 		sortButton = new JButton("Sort");
@@ -108,9 +108,12 @@ public class MainFrame extends JFrame implements ActionListener {
 			sortButton.setEnabled(false);
 		} else if (e.getSource() == exitButton) {
 			System.exit(0);
-		}else if(e.getSource() == shuffleButton) {
-			if (Integer.parseInt(inputArrayAmount.getText()) < 0 || Integer.parseInt(inputArrayAmount.getText()) > 1920) {
-				JOptionPane.showMessageDialog(null, "Die Anzahl der Balken ist falsch (0-1920)");
+		} else if (e.getSource() == shuffleButton) {
+			// sodass ein balken maximal 1 pixel breit ist
+			int maxBalken = Toolkit.getDefaultToolkit().getScreenSize().width;
+			if (Integer.parseInt(inputArrayAmount.getText()) < 0
+					|| Integer.parseInt(inputArrayAmount.getText()) > maxBalken) {
+				JOptionPane.showMessageDialog(null, "Die Anzahl der Balken ist falsch (0-" + maxBalken + ")");
 				return;
 			}
 			a = new ArrayList<Integer>();
@@ -126,11 +129,11 @@ public class MainFrame extends JFrame implements ActionListener {
 	public void drawArray(ArrayList<Integer> a, HashMap<Integer, Color> specialColors) {
 		graphicPanel.drawArray(a, specialColors);
 	}
-	
+
 	public void drawArray(ArrayList<Integer> a) {
 		drawArray(a, new HashMap<Integer, Color>());
 	}
-	
+
 	public void incrementSwapCounter() {
 		swapCounter++;
 		labelSwapCounter.setText("Balken getauscht : " + swapCounter);
