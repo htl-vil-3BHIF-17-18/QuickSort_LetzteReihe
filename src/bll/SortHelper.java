@@ -11,7 +11,19 @@ public class SortHelper {
 	private static SortHelper instance;
 	private static MainFrame f;
 
+	public enum SORT_TYPE {
+		quicksort, mergesort
+	}
+
+	private SORT_TYPE selectedSort = SORT_TYPE.quicksort;
+
 	private SortHelper() {
+	}
+
+	public void sort(ArrayList<Integer> arrayToSort) {
+		if (selectedSort == SORT_TYPE.quicksort) {
+			quicksort(arrayToSort, 0, arrayToSort.size() - 1);
+		}
 	}
 
 	public static SortHelper getInstance(MainFrame frame) {
@@ -22,7 +34,7 @@ public class SortHelper {
 		return instance;
 	}
 
-	public void quicksort(ArrayList<Integer> arrayToSort, int left, int right) {
+	private void quicksort(ArrayList<Integer> arrayToSort, int left, int right) {
 		int index = quickSortTeile(arrayToSort, left, right);
 		if (left < index - 1)
 			quicksort(arrayToSort, left, index - 1);
@@ -65,4 +77,15 @@ public class SortHelper {
 		list.set(index2, temp);
 	}
 
+	public void setSelectedSort(SORT_TYPE selectedSort) {
+		this.selectedSort = selectedSort;
+	}
+
+	public String[] getSortTypes() {
+		String[] types = new String[SORT_TYPE.values().length];
+		for(int i = 0; i < SORT_TYPE.values().length; i++)
+			types[i] = SORT_TYPE.values()[i].toString();
+		return types;
+	}
+	
 }

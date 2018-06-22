@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import bll.SortHelper;
+import bll.SortHelper.SORT_TYPE;
 
 public class MainFrame extends JFrame implements ActionListener {
 	private static final long serialVersionUID = -8026416994513756565L;
@@ -25,12 +27,16 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JButton sortButton;
 	private JButton shuffleButton;
 	private JButton exitButton;
+	private JComboBox<String> comboBoxSortingType;
 	private JTextField inputArrayAmount;
 	private JPanel topPanel;
 	private DrawingPanel graphicPanel;
 	private ArrayList<Integer> a;
 
+	private SortHelper sh;
+	
 	public MainFrame() {
+		sh = SortHelper.getInstance(this);
 		initializeControls();
 	}
 
@@ -45,8 +51,9 @@ public class MainFrame extends JFrame implements ActionListener {
 
 		this.setLayout(new BorderLayout());
 
+		comboBoxSortingType = new JComboBox<String>(sh.getSortTypes());
 		topPanel = new JPanel();
-		topPanel.setLayout(new GridLayout(1, 6));
+		topPanel.setLayout(new GridLayout(1, 7));
 		inputArrayAmount = new JTextField();
 		inputArrayAmount.setBounds(140, 70, 200,30);
 		shuffleButton = new JButton("Shuffle Array");
@@ -58,6 +65,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		exitButton.addActionListener(this);
 		topPanel.add(new JLabel(""));
 		topPanel.add(sortButton);
+		topPanel.add(comboBoxSortingType);
 		topPanel.add(shuffleButton);
 		topPanel.add(inputArrayAmount);
 		topPanel.add(exitButton);
@@ -70,9 +78,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sortButton) {
-			SortHelper h = SortHelper.getInstance(this);
-			h.quicksort(a, 0, a.size() - 1);
-			//h.sort(a);
+			sh.setSelectedSort(SORT_TYPE.valueOf((String) comboBoxSortingType.getSelectedItem()));
+			sh.sort(a);
 			sortButton.setEnabled(false);
 		} else if (e.getSource() == exitButton) {
 			System.exit(0);
