@@ -32,6 +32,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JPanel topPanel;
 	private DrawingPanel graphicPanel;
 	private ArrayList<Integer> a;
+	private JLabel labelSwapCounter;
+	private int swapCounter;
 
 	private SortHelper sh;
 	
@@ -51,9 +53,10 @@ public class MainFrame extends JFrame implements ActionListener {
 
 		this.setLayout(new BorderLayout());
 
+		labelSwapCounter = new JLabel("Balken getauscht : " + swapCounter);
 		comboBoxSortingType = new JComboBox<String>(sh.getSortTypes());
 		topPanel = new JPanel();
-		topPanel.setLayout(new GridLayout(1, 7));
+		topPanel.setLayout(new GridLayout(2, 7));
 		inputArrayAmount = new JTextField();
 		inputArrayAmount.setBounds(140, 70, 200,30);
 		shuffleButton = new JButton("Shuffle Array");
@@ -70,6 +73,13 @@ public class MainFrame extends JFrame implements ActionListener {
 		topPanel.add(inputArrayAmount);
 		topPanel.add(exitButton);
 		topPanel.add(new JLabel(""));
+		topPanel.add(new JLabel(""));
+		topPanel.add(labelSwapCounter);
+		topPanel.add(new JLabel(""));
+		topPanel.add(new JLabel(""));
+		topPanel.add(new JLabel(""));
+		topPanel.add(new JLabel(""));
+		topPanel.add(new JLabel(""));
 		this.add(topPanel, BorderLayout.PAGE_START);
 		graphicPanel = new DrawingPanel(this);
 		this.add(graphicPanel, BorderLayout.CENTER);
@@ -78,6 +88,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sortButton) {
+			swapCounter = 0;
 			sh.setSelectedSort(SORT_TYPE.valueOf((String) comboBoxSortingType.getSelectedItem()));
 			sh.sort(a);
 			sortButton.setEnabled(false);
@@ -104,6 +115,12 @@ public class MainFrame extends JFrame implements ActionListener {
 	
 	public void drawArray(ArrayList<Integer> a) {
 		drawArray(a, new HashMap<Integer, Color>());
+	}
+	
+	public void incrementSwapCounter() {
+		swapCounter++;
+		labelSwapCounter.setText("Balken getauscht : " + swapCounter);
+		this.revalidate();
 	}
 
 }
