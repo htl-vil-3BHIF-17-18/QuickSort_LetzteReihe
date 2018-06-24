@@ -14,20 +14,16 @@ public class Heapsort extends SortingMethod {
 	}
 
 	public void sort(ArrayList<Integer> arrayToSort) {
-		heapsort(arrayToSort);
-	}
+		int length = arrayToSort.size();
 
-	private void heapsort(ArrayList<Integer> array) {
-		int length = array.size();
-
-		buildMaxHeap(array, length);
+		buildMaxHeap(arrayToSort, length);
 		for (int i = length - 1; i > 0; i--) {
 			HashMap<Integer, Color> hashmap = new HashMap<Integer, Color>();
 			hashmap.put(i, Color.red);
 			hashmap.put(0, Color.red);
-			f.drawArray(array);
-			switchElements(array, i, 0);
-			maxHeapify(array, 1, i);
+			f.drawArray(arrayToSort, hashmap);
+			switchElements(arrayToSort, i, 0);
+			maxHeapify(arrayToSort, 1, i);
 		}
 	}
 

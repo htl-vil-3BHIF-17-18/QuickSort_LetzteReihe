@@ -23,7 +23,6 @@ public class Quicksort extends SortingMethod {
 			quicksort(arrayToSort, left, index - 1);
 		if (index < right)
 			quicksort(arrayToSort, index, right);
-		f.drawArray(arrayToSort);
 	}
 
 	private int quickSortTeile(ArrayList<Integer> data, int left, int right) {

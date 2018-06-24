@@ -10,7 +10,7 @@ public class SortHelper {
 	
 
 	public enum SORT_TYPE {
-		quicksort, heapsort
+		quicksort, heapsort, radixsort
 	}
 
 	private SORT_TYPE selectedSort = SORT_TYPE.quicksort;
@@ -21,12 +21,14 @@ public class SortHelper {
 		this.f = f;
 		sortingMethods.add(new Quicksort(f, SORT_TYPE.quicksort));
 		sortingMethods.add(new Heapsort(f, SORT_TYPE.heapsort));
+		sortingMethods.add(new Radixsort(f, SORT_TYPE.radixsort));
 	}
 
 	public void sort(ArrayList<Integer> arrayToSort) {
 		for (SortingMethod s : sortingMethods)
 			if (s.getSortType() == selectedSort)
 				s.sort(arrayToSort);
+		f.drawArray(arrayToSort);
 		f.enableShuffleBtn();
 	}
 

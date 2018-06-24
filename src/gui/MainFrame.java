@@ -107,6 +107,8 @@ public class MainFrame extends JFrame implements ActionListener {
 			threadSorting.start();
 			sortButton.setEnabled(false);
 			shuffleButton.setEnabled(false);
+			swapCounter = -1;
+			incrementSwapCounter();
 		} else if (e.getSource() == exitButton) {
 			System.exit(0);
 		} else if (e.getSource() == shuffleButton) {
