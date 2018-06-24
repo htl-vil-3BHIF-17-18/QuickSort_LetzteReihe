@@ -33,7 +33,7 @@ public class DrawingPanel extends JPanel {
 		int widthOfChart = widthOfBar * array.size();
 		for (int i = 0; i < array.size(); i++) {
 			int heightOfBar = (int) ((float) (height - margin) / (float) getMaxValue(array) * array.get(i));
-			g.setColor(getRainbow(360 * array.get(i) / getMaxValue(array)));
+			g.setColor(getRainbow(359 * array.get(i) / getMaxValue(array)));
 			// g.setColor(new Color(0, checkColor((int) ((255 / (float)
 			// array.size()) * array.get(i))), 0));
 			if (specialColors.containsKey(i)) {
