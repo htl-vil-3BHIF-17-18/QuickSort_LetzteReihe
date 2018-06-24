@@ -1,7 +1,9 @@
 package bll;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import bll.SortHelper.SORT_TYPE;
 import gui.MainFrame;
@@ -43,7 +45,9 @@ public class Radixsort extends SortingMethod {
 
 		for (i = 0; i < n; i++) {
 			arr.set(i, output[i]);
-			f.drawArray(arr);
+			HashMap<Integer, Color> h = new HashMap<Integer, Color>();
+			h.put(i, Color.red);
+			f.drawArray(arr, h);
 		}
 		
 	}
