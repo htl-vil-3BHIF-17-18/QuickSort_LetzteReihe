@@ -140,7 +140,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		labelSwapCounter.setText("Balken getauscht : " + swapCounter);
 		this.revalidate();
 	}
-	
+
 	public void enableShuffleBtn() {
 		shuffleButton.setEnabled(true);
 	}
