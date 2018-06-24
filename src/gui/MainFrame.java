@@ -50,10 +50,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 		this.setMinimumSize(Toolkit.getDefaultToolkit().getScreenSize());
 		this.setUndecorated(true);
-
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-
 		this.setLayout(new BorderLayout());
 
 		labelSwapCounter = new JLabel("Balken getauscht : " + swapCounter);
