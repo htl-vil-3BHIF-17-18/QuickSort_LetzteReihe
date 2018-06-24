@@ -7,8 +7,6 @@ import gui.MainFrame;
 
 public class SortHelper {
 
-	
-
 	public enum SORT_TYPE {
 		quicksort, heapsort, radixsort, mergesort, insertionsort
 	}
