@@ -41,7 +41,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private Thread threadSorting;
 
 	public MainFrame() {
-		sh = SortHelper.getInstance(this);
+		sh = new SortHelper(this);
 		initializeControls();
 	}
 
@@ -106,6 +106,7 @@ public class MainFrame extends JFrame implements ActionListener {
 			threadSorting = new Thread(sortingRunnable);
 			threadSorting.start();
 			sortButton.setEnabled(false);
+			shuffleButton.setEnabled(false);
 		} else if (e.getSource() == exitButton) {
 			System.exit(0);
 		} else if (e.getSource() == shuffleButton) {
@@ -138,6 +139,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		swapCounter++;
 		labelSwapCounter.setText("Balken getauscht : " + swapCounter);
 		this.revalidate();
+	}
+	
+	public void enableShuffleBtn() {
+		shuffleButton.setEnabled(true);
 	}
 
 }
