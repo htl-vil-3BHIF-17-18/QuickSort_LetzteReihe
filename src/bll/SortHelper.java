@@ -10,7 +10,7 @@ public class SortHelper {
 	
 
 	public enum SORT_TYPE {
-		quicksort, heapsort, radixsort, mergesort
+		quicksort, heapsort, radixsort, mergesort, insertionsort
 	}
 
 	private SORT_TYPE selectedSort = SORT_TYPE.quicksort;
@@ -23,6 +23,7 @@ public class SortHelper {
 		sortingMethods.add(new Heapsort(f, SORT_TYPE.heapsort));
 		sortingMethods.add(new Radixsort(f, SORT_TYPE.radixsort));
 		sortingMethods.add(new Mergesort(f, SORT_TYPE.mergesort));
+		sortingMethods.add(new Insertionsort(f, SORT_TYPE.insertionsort));
 	}
 
 	public void sort(ArrayList<Integer> arrayToSort) {
