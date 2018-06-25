@@ -20,7 +20,7 @@ public class Shellsort extends SortingMethod {
 				for (j = i; j >= gap && arrayToSort.get(j - gap) > temp; j -= gap)
 					arrayToSort.set(j, arrayToSort.get(j - gap));
 				arrayToSort.set(j, temp);
-				if (i % 4 == 0)
+				if (i % 10 == 0)
 					f.drawArray(arrayToSort);
 				f.incrementSwapCounter();
 			}

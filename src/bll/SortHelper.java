@@ -8,7 +8,7 @@ import gui.MainFrame;
 public class SortHelper {
 
 	public enum SORT_TYPE {
-		quicksort, heapsort, radixsort, mergesort, insertionsort, bubblesort, shellsort
+		quicksort, heapsort, radixsort, mergesort, insertionsort, bubblesort, shellsort, shakersort
 	}
 
 	private SORT_TYPE selectedSort = SORT_TYPE.quicksort;
@@ -24,6 +24,7 @@ public class SortHelper {
 		sortingMethods.add(new Insertionsort(f, SORT_TYPE.insertionsort));
 		sortingMethods.add(new Bubblesort(f, SORT_TYPE.bubblesort));
 		sortingMethods.add(new Shellsort(f, SORT_TYPE.shellsort));
+		sortingMethods.add(new Shakersort(f, SORT_TYPE.shakersort));
 	}
 
 	public void sort(ArrayList<Integer> arrayToSort) {
