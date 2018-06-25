@@ -41,12 +41,13 @@ public class DrawingPanel extends JPanel {
 	}
 
 	public void drawBar(ArrayList<Integer> array, int index) {
-		Graphics2D g = (Graphics2D) f.getGraphics();
+		BufferedImage tempBi = new BufferedImage(array.size(), getMaxValue(array), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = (Graphics2D) tempBi.getGraphics();
 		g.setColor(Color.white);
-		// g.fillRect(index, 0, 1, bi.getHeight());
+		g.fillRect(index, 0, 1, tempBi.getHeight());
 		g.setColor(getRainbow(array, index));
-		g.fillRect(index * (this.getWidth() / array.size()), bi.getHeight() - array.get(index) + margin,
-				this.getWidth() / array.size(), array.get(index));
+		g.fillRect(index, tempBi.getHeight() - array.get(index), 1, array.get(index));
+		f.getGraphics().drawImage(tempBi, 0, margin, this.getWidth(), imageDrawingHeight, null);
 	}
 
 	public void resetImageWidth(ArrayList<Integer> array) {
