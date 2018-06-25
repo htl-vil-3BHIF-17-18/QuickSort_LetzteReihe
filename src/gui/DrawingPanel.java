@@ -15,38 +15,35 @@ public class DrawingPanel extends JPanel {
 	private MainFrame f;
 	private BufferedImage bi;
 	private int margin = 75;
+	private int imageDrawingHeight = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() - margin);
 
 	public DrawingPanel(MainFrame f) {
 		this.f = f;
 		this.setMinimumSize(Toolkit.getDefaultToolkit().getScreenSize());
-		bi = new BufferedImage((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
-				(int) Toolkit.getDefaultToolkit().getScreenSize().getHeight(), BufferedImage.TYPE_INT_ARGB);
 	}
 
 	public void drawArray(ArrayList<Integer> array, HashMap<Integer, Color> specialColors) {
+		resetImageWidth(array);
 		Graphics2D g = (Graphics2D) bi.getGraphics();
 		g.setColor(Color.white);
 		g.fillRect(0, 0, bi.getWidth(), bi.getHeight());
-		int height = this.getHeight();
-		int width = this.getWidth();
-		int widthOfBar = (int) Math.floor(width / array.size());
-		int widthOfChart = widthOfBar * array.size();
 		for (int i = 0; i < array.size(); i++) {
-			int heightOfBar = (int) ((float) (height - margin) / (float) getMaxValue(array) * array.get(i));
 			g.setColor(getRainbow(359 * array.get(i) / getMaxValue(array)));
-			// g.setColor(new Color(0, checkColor((int) ((255 / (float)
-			// array.size()) * array.get(i))), 0));
 			if (specialColors.containsKey(i)) {
 				g.setColor(specialColors.get(i));
 			}
-			g.fillRect(i * widthOfBar, bi.getHeight() - heightOfBar - margin, widthOfBar, heightOfBar);
+			g.fillRect(i, bi.getHeight() - array.get(i), 1, array.get(i));
 		}
-		f.getGraphics().drawImage(bi, 0, margin, (int) (bi.getWidth() * (bi.getWidth() / (float) widthOfChart)),
-				bi.getHeight(), null);
+		f.getGraphics().drawImage(bi, 0, margin, this.getWidth(), imageDrawingHeight, null);
 	}
 
 	public void drawArray(ArrayList<Integer> array) {
 		drawArray(array, new HashMap<Integer, Color>());
+	}
+
+	private void resetImageWidth(ArrayList<Integer> array) {
+		if (bi == null || array.size() != bi.getWidth())
+			bi = new BufferedImage(array.size(), getMaxValue(array), BufferedImage.TYPE_INT_ARGB);
 	}
 
 	private int getMaxValue(ArrayList<Integer> array) {

@@ -17,11 +17,10 @@ public class Insertionsort extends SortingMethod {
 			int key = arrayToSort.get(i);
 			int j = i - 1;
 			while (j >= 0 && arrayToSort.get(j) > key) {
-				arrayToSort.set(j+1, arrayToSort.get(j));
-				f.drawArray(arrayToSort);
+				arrayToSort.set(j + 1, arrayToSort.get(j));
 				j = j - 1;
 			}
-			arrayToSort.set(j+1, key);
+			arrayToSort.set(j + 1, key);
 			f.drawArray(arrayToSort);
 		}
 	}

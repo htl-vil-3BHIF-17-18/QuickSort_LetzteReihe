@@ -132,7 +132,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 
 	public void drawArray(ArrayList<Integer> a) {
-		drawArray(a, new HashMap<Integer, Color>());
+		graphicPanel.drawArray(a);
 	}
 
 	public void incrementSwapCounter() {
