@@ -122,7 +122,8 @@ public class MainFrame extends JFrame implements ActionListener {
 				a.add(i);
 			}
 			Collections.shuffle(a);
-			drawArray(a);
+			graphicPanel.resetImageWidth(a);
+			graphicPanel.drawArray(a);
 			sortButton.setEnabled(true);
 		}
 	}
@@ -133,6 +134,10 @@ public class MainFrame extends JFrame implements ActionListener {
 
 	public void drawArray(ArrayList<Integer> a) {
 		graphicPanel.drawArray(a);
+	}
+	
+	public void drawBar(ArrayList<Integer> array, int index) {
+		graphicPanel.drawBar(array, index);
 	}
 
 	public void incrementSwapCounter() {

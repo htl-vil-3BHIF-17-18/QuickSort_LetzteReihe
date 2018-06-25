@@ -19,6 +19,8 @@ public class Bubblesort extends SortingMethod {
 				if(i != arrayToSort.size()-1) {
 					if(arrayToSort.get(i) > arrayToSort.get(i+1)) {
 						switchElements(arrayToSort, i, i+1);
+						//f.drawBar(arrayToSort, i);
+						//f.drawBar(arrayToSort, i+1);
 						switched = true;
 					}
 				}

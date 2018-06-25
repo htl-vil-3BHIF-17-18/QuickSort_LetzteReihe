@@ -23,12 +23,11 @@ public class DrawingPanel extends JPanel {
 	}
 
 	public void drawArray(ArrayList<Integer> array, HashMap<Integer, Color> specialColors) {
-		resetImageWidth(array);
 		Graphics2D g = (Graphics2D) bi.getGraphics();
 		g.setColor(Color.white);
 		g.fillRect(0, 0, bi.getWidth(), bi.getHeight());
 		for (int i = 0; i < array.size(); i++) {
-			g.setColor(getRainbow(359 * array.get(i) / getMaxValue(array)));
+			g.setColor(getRainbow(array, i));
 			if (specialColors.containsKey(i)) {
 				g.setColor(specialColors.get(i));
 			}
@@ -41,7 +40,16 @@ public class DrawingPanel extends JPanel {
 		drawArray(array, new HashMap<Integer, Color>());
 	}
 
-	private void resetImageWidth(ArrayList<Integer> array) {
+	public void drawBar(ArrayList<Integer> array, int index) {
+		Graphics2D g = (Graphics2D) f.getGraphics();
+		g.setColor(Color.white);
+		// g.fillRect(index, 0, 1, bi.getHeight());
+		g.setColor(getRainbow(array, index));
+		g.fillRect(index * (this.getWidth() / array.size()), bi.getHeight() - array.get(index) + margin,
+				this.getWidth() / array.size(), array.get(index));
+	}
+
+	public void resetImageWidth(ArrayList<Integer> array) {
 		if (bi == null || array.size() != bi.getWidth())
 			bi = new BufferedImage(array.size(), getMaxValue(array), BufferedImage.TYPE_INT_ARGB);
 	}
@@ -55,7 +63,8 @@ public class DrawingPanel extends JPanel {
 		return max;
 	}
 
-	private Color getRainbow(int hue) {
+	private Color getRainbow(ArrayList<Integer> a, int index) {
+		int hue = 359 * a.get(index) / getMaxValue(a);
 		int r = 0, g = 0, b = 0;
 		double x = 255 * (1 - Math.abs((hue / 60f % 2 - 1)));
 		if (hue >= 0 && hue < 60) {
