@@ -14,7 +14,8 @@ public class SortHelper {
 	private SORT_TYPE selectedSort = SORT_TYPE.quicksort;
 	private MainFrame f;
 	private HashSet<SortingMethod> sortingMethods = new HashSet<SortingMethod>();
-	
+	private Thread sortingThread;
+
 	public SortHelper(MainFrame f) {
 		this.f = f;
 		sortingMethods.add(new Quicksort(f, SORT_TYPE.quicksort));
@@ -27,7 +28,8 @@ public class SortHelper {
 		sortingMethods.add(new Shakersort(f, SORT_TYPE.shakersort));
 	}
 
-	public void sort(ArrayList<Integer> arrayToSort) {
+	public void sort(ArrayList<Integer> arrayToSort, Thread t) {
+		sortingThread = t;
 		for (SortingMethod s : sortingMethods)
 			if (s.getSortType() == selectedSort)
 				s.sort(arrayToSort);
@@ -37,6 +39,10 @@ public class SortHelper {
 
 	public void setSelectedSort(SORT_TYPE selectedSort) {
 		this.selectedSort = selectedSort;
+	}
+
+	public Thread getSortingThread() {
+		return sortingThread;
 	}
 
 	public String[] getSortTypes() {

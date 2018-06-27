@@ -27,6 +27,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JButton sortButton;
 	private JButton shuffleButton;
 	private JButton exitButton;
+	private JButton stopButton;
 	private JComboBox<String> comboBoxSortingType;
 	private JTextField inputArrayAmount;
 	private JPanel topPanel;
@@ -54,19 +55,22 @@ public class MainFrame extends JFrame implements ActionListener {
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 
+		stopButton = new JButton("Stop");
 		labelSwapCounter = new JLabel("Balken getauscht : " + swapCounter);
+		shuffleButton = new JButton("Shuffle Array");
+		sortButton = new JButton("Sort");
+		exitButton = new JButton("Exit");
 		comboBoxSortingType = new JComboBox<String>(sh.getSortTypes());
 		topPanel = new JPanel();
-		topPanel.setLayout(new GridLayout(2, 7));
 		inputArrayAmount = new JTextField();
+		topPanel.setLayout(new GridLayout(2, 7));
 		inputArrayAmount.setBounds(140, 70, 200, 30);
-		shuffleButton = new JButton("Shuffle Array");
-		shuffleButton.addActionListener(this);
-		sortButton = new JButton("Sort");
-		sortButton.addActionListener(this);
+		stopButton.setEnabled(false);
 		sortButton.setEnabled(false);
-		exitButton = new JButton("Exit");
+		shuffleButton.addActionListener(this);
+		sortButton.addActionListener(this);
 		exitButton.addActionListener(this);
+		stopButton.addActionListener(this);
 		topPanel.add(new JLabel(""));
 		topPanel.add(sortButton);
 		topPanel.add(comboBoxSortingType);
@@ -75,8 +79,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		topPanel.add(exitButton);
 		topPanel.add(new JLabel(""));
 		topPanel.add(new JLabel(""));
+		topPanel.add(stopButton);
 		topPanel.add(labelSwapCounter);
-		topPanel.add(new JLabel(""));
 		topPanel.add(new JLabel(""));
 		topPanel.add(new JLabel(""));
 		topPanel.add(new JLabel(""));
@@ -87,13 +91,14 @@ public class MainFrame extends JFrame implements ActionListener {
 		this.pack();
 	}
 
+	@SuppressWarnings("deprecation") // Thread stop, sollte anders gelöst werden
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sortButton) {
 			swapCounter = 0;
 			sh.setSelectedSort(SORT_TYPE.valueOf((String) comboBoxSortingType.getSelectedItem()));
 			sortingRunnable = new Runnable() {
 				public void run() {
-					sh.sort(a);
+					sh.sort(a, threadSorting);
 					try {
 						threadSorting.join();
 					} catch (InterruptedException e) {
@@ -105,6 +110,7 @@ public class MainFrame extends JFrame implements ActionListener {
 			threadSorting.start();
 			sortButton.setEnabled(false);
 			shuffleButton.setEnabled(false);
+			stopButton.setEnabled(true);
 			swapCounter = -1;
 			incrementSwapCounter();
 		} else if (e.getSource() == exitButton) {
@@ -125,6 +131,11 @@ public class MainFrame extends JFrame implements ActionListener {
 			graphicPanel.resetImageWidth(a);
 			graphicPanel.drawArray(a);
 			sortButton.setEnabled(true);
+		} else if (e.getSource() == stopButton) {
+			threadSorting.stop();
+			stopButton.setEnabled(false);
+			sortButton.setEnabled(true);
+			shuffleButton.setEnabled(true);
 		}
 	}
 
@@ -135,7 +146,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	public void drawArray(ArrayList<Integer> a) {
 		graphicPanel.drawArray(a);
 	}
-	
+
 	public void drawBar(ArrayList<Integer> array, int index) {
 		graphicPanel.drawBar(array, index);
 	}
